@@ -1,48 +1,44 @@
 package ticTacToe;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-	
+import org.junit.jupiter.api.*;
 
 class GameBoardTest {
 	
 	GameBoard b;
-	
-	/*
-	 * 		int[] ints = {1, 2, 3};
-		
 
-		int max = t.max();	
-	     
-	     Assertions.assertEquals(3, max);
-	 */
-
-	@BeforeEach
-	
-	
-	
-	void setup() {
-		
-		
-	}
-	
 	@Test
-	void test_checkWinner() {
-		b = new GameBoard();
-		for(int i = 0; i < b.boardSize; i++) {
-			for (int j = 0; j < b.boardSize; j++)
-				{[i][j] = 'o';}
-		}
-		Player p = new ComputerPlayer("C");
-		
-		
-		Assertions.assertEquals(p, 'o');
-		
-
-		
-
+	void test_isFull_isTrue() {
+		char[][] list = {{'x', 'x', 'x'}, {'x', 'x', 'x'}, {'x', 'x', 'x'}};
+		b = new GameBoard(list);
+		Assertions.assertTrue(b.isFull());
+	}
+	
+	void test_isFull_isFalse() {
+		char[][] list = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
+		b = new GameBoard(list);
+		Assertions.assertFalse(b.isFull());
 	}
 
+	
+	void test_isAvailable_isTrue() {
+		char[][] list = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
+		b = new GameBoard(list);
+		int[] choice = {1, 1};
+		Assertions.assertTrue(b.isAvailable(choice));
+	}
+	
+	void test_isAvailable_isFalse() {
+		char[][] list = {{'x', 'x', 'x'}, {'x', 'x', 'x'}, {'x', 'x', 'x'}};
+		b = new GameBoard(list);
+		int[] choice = {1, 1};
+		Assertions.assertFalse(b.isAvailable(choice));
+	}
+	
+	void test_checkWinner() {
+		char[][] list = {{' ', 'x', 'x'}, {'x', 'x', 'x'}, {'x', 'x', 'x'}};
+		Player p = new HumanPlayer("H");
+		b = new GameBoard(list);
+		int[] choice = {1, 1};
+		Assertions.assertEquals(b.checkWinner(p, choice), 'x');
+	}
 }

@@ -19,8 +19,14 @@ public class GameBoard {
 			for (int j = 0; j < boardSize; j++){
 				boxes[i][j] = unchosen;
 			}}
+	}
+	
+	public GameBoard(char[][] list) {
+		for(int i = 0; i < boardSize; i++) {
+			for (int j = 0; j < boardSize; j++){
+				boxes[i][j] = list[i][j];
+			}}
 		
-
 	}
 	
 	//check if a given box is available
